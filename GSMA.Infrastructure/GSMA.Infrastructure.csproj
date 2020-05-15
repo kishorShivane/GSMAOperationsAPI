@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GSMA.Core\GSMA.Core.csproj" />
+    <ProjectReference Include="..\GSMA.DataProvider\GSMA.DataProvider.csproj" />
+    <ProjectReference Include="..\GSMA.Logger\GSMA.Logger.csproj" />
+    <ProjectReference Include="..\GSMA.Mapper\GSMA.Mapper.csproj" />
+    <ProjectReference Include="..\GSMA.Models\GSMA.Models.csproj" />
+    <ProjectReference Include="..\GSMA.Repository\GSMA.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
