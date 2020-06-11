@@ -1,13 +1,9 @@
-using AutoMapper;
 using GSMA.Infrastructure.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 
 namespace GSMA.API
 {
@@ -25,6 +21,17 @@ namespace GSMA.API
         {
             services.AddHttpClient();
             services.AddControllers();
+
+            //Enable CORS
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+
+            //services.AddMvc(options =>
+            //{
+            //    options.Filters.Add<UsageLog>();
+            //});
 
             // Register the Swagger generator
             services.AddCustomSwagger();

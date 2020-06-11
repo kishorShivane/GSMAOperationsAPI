@@ -9,6 +9,7 @@ using GSMA.Models.Request;
 using GSMA.Models.Response;
 using GSMA.Repository.Repository;
 using Microsoft.EntityFrameworkCore.Internal;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,17 +43,21 @@ namespace GSMA.Core.Service
                     }
                     else
                     {
-                        response.AddInformationMessage(MessageConstant.DELETE_INFORMATION_NO_DATA_FOUND);
+                        response.AddInformationMessage(MessageConstant.DELETE_INFORMATION_NO_DATA_FOUND + ": ID = " + id);
+                        logger.LogInfo(MessageConstant.DELETE_INFORMATION_NO_DATA_FOUND + ": ID = " + id);
                     }
                 }
                 else
                 {
                     response.AddErrorMessage(MessageConstant.GENERAL_INVALID_ARGUMENT);
+                    logger.LogInfo(MessageConstant.GENERAL_INVALID_ARGUMENT);
                 }
             }
             catch (Exception ex)
             {
+                string message = JsonConvert.SerializeObject(ex).ToString();
                 response.AddErrorMessage(ex.Message);
+                logger.LogError(message);
             }
 
             return response;
@@ -71,20 +76,26 @@ namespace GSMA.Core.Service
                     {
                         response = new Response<List<UserTypeModel>>();
                         response.ResultSet = resultSet.Select(mapper.Map<UserType, UserTypeModel>).ToList();
+                        logger.LogInfo("Found: " + response.ResultSet.Count() +" records");
                     }
                     else
                     {
+                        var requestString = JsonConvert.SerializeObject(request);
                         response.AddInformationMessage(MessageConstant.GET_INFORMATION_NO_MATCHING_RECORDS_FOUND);
+                        logger.LogInfo(MessageConstant.GET_INFORMATION_NO_MATCHING_RECORDS_FOUND + " Request: " + requestString);
                     }
                 }
                 else
                 {
                     response.AddErrorMessage(MessageConstant.GENERAL_INVALID_ARGUMENT);
+                    logger.LogInfo(MessageConstant.GENERAL_INVALID_ARGUMENT);
                 }
             }
             catch (Exception ex)
             {
+                string message = JsonConvert.SerializeObject(ex).ToString();
                 response.AddErrorMessage(ex.Message);
+                logger.LogError(message);
             }
             return response;
         }
@@ -109,17 +120,22 @@ namespace GSMA.Core.Service
                     }
                     else
                     {
+                        var requestString = JsonConvert.SerializeObject(request);
                         response.AddErrorMessage(MessageConstant.INSERT_ERROR_RECORD_EXIST);
+                        logger.LogInfo(MessageConstant.INSERT_ERROR_RECORD_EXIST + " Request: " + requestString);
                     }
                 }
                 else
                 {
                     response.AddErrorMessage(MessageConstant.GENERAL_INVALID_ARGUMENT);
+                    logger.LogInfo(MessageConstant.GENERAL_INVALID_ARGUMENT);
                 }
             }
             catch (Exception ex)
             {
+                string message = JsonConvert.SerializeObject(ex).ToString();
                 response.AddErrorMessage(ex.Message);
+                logger.LogError(message);
             }
 
             return response;
@@ -143,11 +159,14 @@ namespace GSMA.Core.Service
                 else
                 {
                     response.AddErrorMessage(MessageConstant.GENERAL_INVALID_ARGUMENT);
+                    logger.LogInfo(MessageConstant.GENERAL_INVALID_ARGUMENT);
                 }
             }
             catch (Exception ex)
             {
+                string message = JsonConvert.SerializeObject(ex).ToString();
                 response.AddErrorMessage(ex.Message);
+                logger.LogError(message);
             }
 
             return response;
@@ -173,17 +192,22 @@ namespace GSMA.Core.Service
                     }
                     else
                     {
+                        var requestString = JsonConvert.SerializeObject(request);
                         response.AddErrorMessage(MessageConstant.UPDATE_ERROR_NO_RECORD_EXIST);
+                        logger.LogInfo(MessageConstant.UPDATE_ERROR_NO_RECORD_EXIST + " Request: " + requestString);
                     }
                 }
                 else
                 {
                     response.AddErrorMessage(MessageConstant.GENERAL_INVALID_ARGUMENT);
+                    logger.LogInfo(MessageConstant.GENERAL_INVALID_ARGUMENT);
                 }
             }
             catch (Exception ex)
             {
+                string message = JsonConvert.SerializeObject(ex).ToString();
                 response.AddErrorMessage(ex.Message);
+                logger.LogError(message);
             }
 
             return response;

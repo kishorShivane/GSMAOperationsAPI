@@ -1,20 +1,16 @@
 ﻿using GSMA.API.Filters;
+using GSMA.Core.Interface;
 using GSMA.Logger;
 using GSMA.Models;
 using GSMA.Models.Request;
-using GSMA.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GSMA.Core.Interface;
-using System;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace GSMA.API.Controllers
 {
     [Route("api/[controller]")]
-    [UsageLog]
+    [TypeFilter(typeof(UsageLog))]
     [ApiController]
     public class EGMDetailsController : GSMABaseController
     {
@@ -25,21 +21,21 @@ namespace GSMA.API.Controllers
             service = _service;
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [Route("TestLog")]
-        [HttpGet]
-        public async Task<string> Test(string name)
-        {
-            await Task.Run(() =>
-            {
-                logger.LogInfo("Hello " + name);
-                logger.LogError("Hello " + name);
-                logger.LogWarn("Hello " + name);
-                logger.LogDebug("Hello " + name);
-            });
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Route("TestLog")]
+        //[HttpGet]
+        //public async Task<string> Test(string name)
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        logger.LogInfo("Hello " + name);
+        //        logger.LogError("Hello " + name);
+        //        logger.LogWarn("Hello " + name);
+        //        logger.LogDebug("Hello " + name);
+        //    });
 
-            return "Hello " + name;
-        }
+        //    return "Hello " + name;
+        //}
 
         [Route("GetEGMDetails")]
         [HttpPost]

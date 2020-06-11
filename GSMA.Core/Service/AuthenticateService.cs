@@ -4,11 +4,12 @@ using GSMA.DataProvider.Data;
 using GSMA.DataProvider.UnitOfWork;
 using GSMA.Logger;
 using GSMA.Models;
+using GSMA.Models.Request;
+using GSMA.Models.Response;
 using GSMA.Repository.Repository;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GSMA.Core.Service
@@ -25,19 +26,30 @@ namespace GSMA.Core.Service
             repository = unitOfWork.GetRepository<User>();
         }
 
-        public async Task<UserModel> ValidateUserCredential(UserModel user)
+        public async Task<Response<UserModel>> ValidateUserCredential(Request<UserModel> request)
         {
-            if (user != null)
+            var response = new Response<UserModel>();
+            try
             {
-                var validUser = await Task.Run(() => repository.GetQueryable().FirstOrDefault(x => x.Email.ToLower().Equals(user.Email.ToLower())));
-                if (validUser != null)
+                if (request != null && request.Entity != null)
                 {
-                    user = mapper.Map<UserModel>(validUser);
+                    var validUser = await Task.Run(() => repository.GetQueryable().FirstOrDefault(x => x.UserName.ToLower().Equals(request.Entity.UserName.ToLower()) && x.Password.Equals(request.Entity.Password)));
+                    if (validUser != null)
+                    {
+                        response.ResultSet = mapper.Map<UserModel>(validUser);
+                    }
+                    else
+                    { response.ResultSet = null; }
                 }
-                else
-                { user = null; }
             }
-            return user;
+            catch (Exception ex)
+            {
+                string message = JsonConvert.SerializeObject(ex).ToString();
+                response.AddErrorMessage(ex.Message);
+                logger.LogError(message);
+            }
+
+            return response;
         }
     }
 }

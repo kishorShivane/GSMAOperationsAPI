@@ -2,7 +2,6 @@
 using GSMA.DataProvider.Data;
 using GSMA.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GSMA.Mapper
 {
@@ -19,6 +18,22 @@ namespace GSMA.Mapper
             CreateMap<EGMSealModel, Egmseals>();
             CreateMap<List<EGMSealModel>, List<Egmseals>>();
             CreateMap<List<Egmseals>, List<EGMSealModel>>();
+
+            CreateMap<SealDetails, SealDetailModel>();
+            CreateMap<SealDetailModel, SealDetails>();
+            CreateMap<List<SealDetailModel>, List<SealDetails>>();
+            CreateMap<List<SealDetails>, List<SealDetailModel>>();
+
+            CreateMap<User, UserModel>();
+            CreateMap<UserModel, User>();
+            CreateMap<List<UserModel>, List<User>>();
+            CreateMap<List<User>, List<UserModel>>();
+
+            CreateMap<UserType, UserTypeModel>();
+            CreateMap<UserTypeModel, UserType>();
+            CreateMap<List<UserTypeModel>, List<UserType>>();
+            CreateMap<List<UserType>, List<UserTypeModel>>();
+
         }
 
         //public static List<TDestination> MapList<TSource, TDestination>(this IMapper mapper, List<TSource> source)

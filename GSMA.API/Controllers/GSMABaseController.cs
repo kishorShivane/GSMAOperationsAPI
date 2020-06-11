@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GSMA.Logger;
+﻿using GSMA.Logger;
 using GSMA.Models.Request;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace GSMA.API.Controllers
 {
     [Route("api/[controller]")]
+    //[TypeFilter(typeof(UsageLog))]
     [ApiController]
     public class GSMABaseController : ControllerBase
     {

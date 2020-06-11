@@ -31,11 +31,14 @@ namespace GSMA.Infrastructure.Security.Services
                 Audience = "GSMA Users",
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Email, user.Email)
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim("ID", user.Id.ToString()),
+                    new Claim("UserName", user.UserName),
+                    new Claim("UserTypeID", user.UserTypeId.ToString()),
+                    new Claim("CreatedDateTime", user.CapturedDateTime.Value.ToShortDateString()),
                 }),
                 NotBefore = DateTime.UtcNow,
                 Expires = DateTime.UtcNow.AddDays(int.Parse(_expDate)),
-                //Expires = DateTime.UtcNow.AddMinutes(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

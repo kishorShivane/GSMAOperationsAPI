@@ -1,13 +1,12 @@
 ﻿using GSMA.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using GSMA.Models.Request;
+using GSMA.Models.Response;
 using System.Threading.Tasks;
 
 namespace GSMA.Core.Interface
 {
     public interface IAuthenticateService
     {
-        Task<UserModel> ValidateUserCredential(UserModel user);
+        Task<Response<UserModel>> ValidateUserCredential(Request<UserModel> request);
     }
 }
