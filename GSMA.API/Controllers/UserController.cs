@@ -3,6 +3,8 @@ using GSMA.Core.Interface;
 using GSMA.Logger;
 using GSMA.Models;
 using GSMA.Models.Request;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ namespace GSMA.API.Controllers
 {
     [Route("api/[controller]")]
     [TypeFilter(typeof(UsageLog))]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class UserController : GSMABaseController
     {
