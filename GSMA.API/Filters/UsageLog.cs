@@ -17,24 +17,39 @@ namespace GSMA.API.Filters
         {
             var remoteIpAddress = context.HttpContext.Connection.RemoteIpAddress;
             var token = SecurityHelper.GetOAuthTokenFromHeader(context.HttpContext.Request.Headers);
-            var email = SecurityHelper.GetClaim(token, ClaimTypes.Email);
+            var email = SecurityHelper.GetClaim(token, "email");
             var controllerName = ((ControllerBase)context.Controller)
                .ControllerContext.ActionDescriptor.ControllerName;
             var actionName = ((ControllerBase)context.Controller)
                .ControllerContext.ActionDescriptor.ActionName;
-            logger.LogInfo("Start - Executing " + controllerName + " --> " + actionName + " for email: " + email);
+            if (string.IsNullOrEmpty(token))
+            {
+                logger.LogInfo("Start - Executing " + controllerName + " --> " + actionName);
+            }
+            else
+            {
+                logger.LogInfo("Start - Executing " + controllerName + " --> " + actionName + " for email: " + email);
+            }
+
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             var remoteIpAddress = context.HttpContext.Connection.RemoteIpAddress;
             var token = SecurityHelper.GetOAuthTokenFromHeader(context.HttpContext.Request.Headers);
-            var email = SecurityHelper.GetClaim(token, ClaimTypes.Email);
+            var email = SecurityHelper.GetClaim(token, "email");
             var controllerName = ((ControllerBase)context.Controller)
                .ControllerContext.ActionDescriptor.ControllerName;
             var actionName = ((ControllerBase)context.Controller)
                .ControllerContext.ActionDescriptor.ActionName;
-            logger.LogInfo("End - Executing " + controllerName + " --> " + actionName + " for email: " + email);
+            if (string.IsNullOrEmpty(token))
+            {
+                logger.LogInfo("Start - Executing " + controllerName + " --> " + actionName);
+            }
+            else
+            {
+                logger.LogInfo("Start - Executing " + controllerName + " --> " + actionName + " for email: " + email);
+            }
         }
     }
 }

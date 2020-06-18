@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GSMA.API.Controllers
 {
     [Route("api/[controller]")]
-    [TypeFilter(typeof(UsageLog))]
+    //[TypeFilter(typeof(UsageLog))]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class GSMABaseController : ControllerBase

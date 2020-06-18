@@ -33,7 +33,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7. Models", "7. Models", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "8. Mapper", "8. Mapper", "{690A3EB2-6413-4C1A-95C9-03A722EB95DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSMA.Mapper", "GSMA.Mapper\GSMA.Mapper.csproj", "{F5A22C5E-4346-4695-A52A-3F2269F2D817}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSMA.Mapper", "GSMA.Mapper\GSMA.Mapper.csproj", "{F5A22C5E-4346-4695-A52A-3F2269F2D817}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9. DBScripts", "9. DBScripts", "{B26D3C5D-219B-4EEC-9342-3A9D4801CE4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

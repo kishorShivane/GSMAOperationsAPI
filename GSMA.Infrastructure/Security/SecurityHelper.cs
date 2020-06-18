@@ -20,7 +20,7 @@ namespace GSMA.Infrastructure.Security
             var token = "";
             if (headers != null && headers.ContainsKey("Authorization"))
             {
-                token = headers["Authorization"].ToString().Replace("Bearer ", "");
+                token = headers["Authorization"].ToString().Replace("Bearer ", "").Replace("bearer ", "");
             }
             return token;
         }
@@ -28,7 +28,7 @@ namespace GSMA.Infrastructure.Security
         public static string GetClaim(string token, string claimType)
         {
             var stringClaimValue = "";
-            if (token != null)
+            if (!string.IsNullOrEmpty(token))
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.ReadToken(token) as JwtSecurityToken;

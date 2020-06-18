@@ -14,6 +14,7 @@ namespace GSMA.Infrastructure.DI
     {
         public static IServiceCollection AddInterfaceDependency(this IServiceCollection services)
         {
+            services.AddScoped<IAuthenticateService, AuthenticateService>();
             services.AddScoped<ILoggerManager, LoggerManager>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IService<EGMDetailModel>, EGMDetailsService>();
