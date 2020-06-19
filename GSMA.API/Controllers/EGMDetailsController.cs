@@ -85,8 +85,8 @@ namespace GSMA.API.Controllers
         }
 
         [Route("DeleteEGMDetail")]
-        [HttpPost]
-        public async Task<IActionResult> Delete([FromBody] int id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
             return await PerformOperation(id, async () =>
             {

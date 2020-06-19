@@ -182,7 +182,8 @@ namespace GSMA.Core.Service
                     var updateMe = await Task.Run(() => repository.GetByID(request.Entity.Id));
                     if (updateMe != null)
                     {
-                        updateMe = mapper.Map<SealDetails>(request.Entity);
+                        updateMe.SerialNumber = request.Entity.SerialNumber;
+
                         await Task.Run(() =>
                         {
                             repository.Update(updateMe);

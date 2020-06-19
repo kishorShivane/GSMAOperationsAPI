@@ -183,7 +183,11 @@ namespace GSMA.Core.Service
                     var updateMe = await Task.Run(() => repository.GetByID(request.Entity.Id));
                     if (updateMe != null)
                     {
-                        updateMe = mapper.Map<Egmdetails>(request.Entity);
+                        updateMe.Egmid = request.Entity.Egmid;
+                        updateMe.Egmname = request.Entity.Egmname;
+                        updateMe.EgmserialNumber = request.Entity.EgmserialNumber;
+                        updateMe.PortNumber = request.Entity.PortNumber;
+
                         await Task.Run(() =>
                         {
                             repository.Update(updateMe);

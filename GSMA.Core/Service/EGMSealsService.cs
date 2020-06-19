@@ -185,7 +185,13 @@ namespace GSMA.Core.Service
                     var updateMe = await Task.Run(() => repository.GetByID(request.Entity.Id));
                     if (updateMe != null)
                     {
-                        updateMe = mapper.Map<Egmseals>(request.Entity);
+                        updateMe.Captureddatetime = request.Entity.Captureddatetime.HasValue? request.Entity.Captureddatetime.Value: DateTime.Now;
+                        updateMe.AssaignedUserId = request.Entity.AssaignedUserId;
+                        updateMe.CapturedUserId = request.Entity.CapturedUserId;
+                        updateMe.Egmid = request.Entity.Egmid;
+                        updateMe.SealId = request.Entity.SealId;
+                        updateMe.JobCompleateDateTime = request.Entity.JobCompleateDateTime;
+
                         await Task.Run(() =>
                         {
                             repository.Update(updateMe);

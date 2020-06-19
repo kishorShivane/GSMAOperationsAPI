@@ -69,7 +69,7 @@ namespace GSMA.API.Controllers
         }
 
         [Route("DeleteUserType")]
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Delete([FromBody] int id)
         {
             return await PerformOperation(id, async () =>
