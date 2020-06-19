@@ -34,8 +34,8 @@ namespace GSMA.Core.Service
             {
                 if (id > 0)
                 {
-                    var deleteMe = await Task.Run(() => repository.Get(x => x.Id == id).ToList());
-                    if (deleteMe != null && deleteMe.Any())
+                    var deleteMe = await Task.Run(() => repository.Get(x => x.Id == id).FirstOrDefault());
+                    if (deleteMe != null)
                     {
                         await Task.Run(() => repository.Delete(deleteMe));
                     }
@@ -68,7 +68,8 @@ namespace GSMA.Core.Service
             {
                 if (request != null && request.Entity != null)
                 {
-                    var resultSet = await Task.Run(() => repository.GetQueryable().Where(x => (x.Egmid == request.Entity.Egmid || request.Entity.Egmid == 0) &&
+                    var resultSet = await Task.Run(() => repository.GetQueryable().Where(x => (x.Id == request.Entity.Id || request.Entity.Id == 0) && 
+                    (x.Egmid == request.Entity.Egmid || request.Entity.Egmid == 0) &&
                                     (String.IsNullOrEmpty(request.Entity.Egmname) || x.Egmname == request.Entity.Egmname) &&
                                     (String.IsNullOrEmpty(request.Entity.EgmserialNumber) || x.EgmserialNumber == request.Entity.EgmserialNumber) &&
                                     (x.PortNumber == request.Entity.PortNumber || request.Entity.PortNumber == 0)).ToList());

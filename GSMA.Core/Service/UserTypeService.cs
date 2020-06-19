@@ -36,8 +36,8 @@ namespace GSMA.Core.Service
             {
                 if (id > 0)
                 {
-                    var deleteMe = await Task.Run(() => repository.Get(x => x.Id == id).ToList());
-                    if (deleteMe != null && deleteMe.Any())
+                    var deleteMe = await Task.Run(() => repository.Get(x => x.Id == id).FirstOrDefault());
+                    if (deleteMe != null)
                     {
                         await Task.Run(() => repository.Delete(deleteMe));
                     }
