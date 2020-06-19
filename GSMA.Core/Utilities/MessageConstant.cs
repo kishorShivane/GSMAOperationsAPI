@@ -12,5 +12,7 @@
 
         public const string INSERT_ERROR_RECORD_EXIST = "Record you are trying to insert already exist";
         public const string UPDATE_ERROR_NO_RECORD_EXIST = "Record you are trying to update does not exist";
+
+        public const string DELETE_INFORMATION_SUCCESSFUL = "Record deleted successfully";
     }
 }

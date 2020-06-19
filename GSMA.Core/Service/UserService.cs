@@ -41,6 +41,10 @@ namespace GSMA.Core.Service
                     {
                         
                         await Task.Run(() => repository.Delete(deleteMe));
+                        unitOfWork.Save();
+                        response.ResultSet = true;
+                        response.AddInformationMessage(MessageConstant.DELETE_INFORMATION_SUCCESSFUL + ": ID = " + id);
+                        logger.LogInfo(MessageConstant.DELETE_INFORMATION_SUCCESSFUL + ": ID = " + id);
                     }
                     else
                     {
